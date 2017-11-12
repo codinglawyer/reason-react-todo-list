@@ -1,0 +1,14 @@
+{
+  "name": "reason-react-boilerplate",
+  "version": "1.0.0",
+  "description": "ready to use webpack configuration for developing reason-react apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "reason-react"
+  ],
+  "author": "David Kopal (https://github.com/codinglawyerr)",
+  "license": "MIT"
+}
