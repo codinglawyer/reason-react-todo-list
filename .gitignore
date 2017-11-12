@@ -1,3 +1,5 @@
 node_modules
 bs
 .merlin
+lib
+bsb.lock
