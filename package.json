@@ -4,6 +4,9 @@
   "description": "ready to use webpack configuration for developing reason-react apps",
   "main": "index.js",
   "scripts": {
+    "dev": "bsb -make-world -w",
+    "build": "webpack -w",
+    "clean": "bsb -clean-world",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
