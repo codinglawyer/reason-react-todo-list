@@ -1,19 +1,26 @@
 {
   "name": "reason-react-boilerplate",
   "version": "1.0.0",
-  "description": "ready to use webpack configuration for developing reason-react apps",
-  "main": "index.js",
+  "description":
+    "ready-to-use webpack configuration for developing reason-react applications",
+  "main": "app/index.js",
   "scripts": {
     "dev": "bsb -make-world -w",
     "build": "webpack -w",
     "clean": "bsb -clean-world",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "reason-react"
-  ],
-  "author": "David Kopal (https://github.com/codinglawyerr)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codinglawyer/reason-react-boilerplate.git"
+  },
+  "keywords": ["reason-react", "reason", "react", "webpack", "boilerplate"],
+  "author": "David Kopal (https://github.com/codinglawyer)",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codinglawyer/reason-react-boilerplate.git/issues"
+  },
+  "homepage": "https://github.com/codinglawyer/reason-react-boilerplate.git",
   "devDependencies": {
     "bs-platform": "^2.0.0",
     "webpack": "^3.8.1"
