@@ -18,4 +18,4 @@ To try the example application out or to use the project, follow the instruction
 
    Webpack - `npm run build`
 
-4. **Open** `build/index.html
+4. **Open** `build/index.html`
