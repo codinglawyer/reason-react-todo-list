@@ -1,7 +1,23 @@
-
 type item = {
   title: string,
   completed: bool
+};
+
+let str = ReasonReact.stringToElement;
+
+module TodoItem = {
+  let component =  ReasonReact.statelessComponent("TodoItem");
+  let make = (~item, children) => {
+    ...component,
+    render: (self) =>
+      <div className="item">
+        <input
+          _type="checkbox"
+          checked=(Js.Boolean.to_js_boolean(item.completed))
+        />
+        (str(item.title))
+      </div>
+  };
 };
 
 type state = {
@@ -10,8 +26,6 @@ type state = {
 
 type action =
   | AddItem;
-
-let str = ReasonReact.stringToElement;
 
 let component = ReasonReact.reducerComponent("TodoApp");
 let newItem = () => {title: "Click a button", completed: false};

@@ -5186,6 +5186,7 @@ var List        = __webpack_require__(10);
 var Block       = __webpack_require__(12);
 var Curry       = __webpack_require__(3);
 var React       = __webpack_require__(4);
+var Js_boolean  = __webpack_require__(48);
 var Pervasives  = __webpack_require__(13);
 var ReasonReact = __webpack_require__(17);
 
@@ -5193,7 +5194,27 @@ function str(prim) {
   return prim;
 }
 
-var component = ReasonReact.reducerComponent("TodoApp");
+var component = ReasonReact.statelessComponent("TodoItem");
+
+function make(item, _) {
+  var newrecord = component.slice();
+  newrecord[/* render */9] = (function () {
+      return React.createElement("div", {
+                  className: "item"
+                }, React.createElement("input", {
+                      checked: Js_boolean.to_js_boolean(item[/* completed */1]),
+                      type: "checkbox"
+                    }), item[/* title */0]);
+    });
+  return newrecord;
+}
+
+var TodoItem = /* module */[
+  /* component */component,
+  /* make */make
+];
+
+var component$1 = ReasonReact.reducerComponent("TodoApp");
 
 function newItem() {
   return /* record */[
@@ -5202,8 +5223,8 @@ function newItem() {
         ];
 }
 
-function make() {
-  var newrecord = component.slice();
+function make$1() {
+  var newrecord = component$1.slice();
   newrecord[/* render */9] = (function (param) {
       var numItems = List.length(param[/* state */4][/* items */0]);
       return React.createElement("div", {
@@ -5242,9 +5263,10 @@ function make() {
 }
 
 exports.str       = str;
-exports.component = component;
+exports.TodoItem  = TodoItem;
+exports.component = component$1;
 exports.newItem   = newItem;
-exports.make      = make;
+exports.make      = make$1;
 /* component Not a pure module */
 
 
@@ -25639,6 +25661,26 @@ function camelize(string) {
 }
 
 module.exports = camelize;
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+
+function to_js_boolean(b) {
+  if (b) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+exports.to_js_boolean = to_js_boolean;
+/* No side effect */
+
 
 /***/ })
 /******/ ]);
