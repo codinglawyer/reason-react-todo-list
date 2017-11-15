@@ -8,10 +8,10 @@ let str = ReasonReact.stringToElement;
 
 module TodoItem = {
   let component =  ReasonReact.statelessComponent("TodoItem");
-  let make = (~item, children) => {
+  let make = (~item, ~onToggle, children) => {
     ...component,
-    render: (self) =>
-      <div className="item">
+    render: (_) =>
+      <div className="item" onClick=((_evt) => onToggle())>
         <input
           _type="checkbox"
           checked=(Js.Boolean.to_js_boolean(item.completed))
@@ -26,7 +26,8 @@ type state = {
 };
 
 type action =
-  | AddItem;
+  | AddItem
+  | ToggleItem(int);
 
 let component = ReasonReact.reducerComponent("TodoApp");
 let lastId = ref(0);
@@ -55,6 +56,14 @@ let make = (children) => {
   reducer: (action, {items}) =>
   switch action {
   | AddItem => ReasonReact.Update({items: [newItem(), ...items]})
+  | ToggleItem(id) =>
+    let items = List.map(
+      (item) =>
+        item.id === id ?
+          {...item, completed: !item.completed} : item,
+        items
+    );
+    ReasonReact.Update({items: items})
   },
 
   render: ({state: {items}, reduce}) => {
@@ -71,6 +80,7 @@ let make = (children) => {
           List.map
             ((item) => <TodoItem
               key=(string_of_int(item.id))
+              onToggle=(reduce(() => ToggleItem(item.id)))
               item
             />, items) |> Array.of_list |> ReasonReact.arrayToElement
         )
