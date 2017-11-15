@@ -56,7 +56,13 @@ let make = (children) => {
       >
         (str("Add something"))
       </button>
-      <div className="items"> (str("Nothing")) </div>
+      <div className="items">
+        (
+          ReasonReact.arrayToElement(Array.of_list(
+            List.map((item) => <TodoItem item />, items)
+          ))
+        )
+      </div>
       <div className="footer">
         (str(string_of_int(numItems) ++ " item"))
       </div>
