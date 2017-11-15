@@ -5256,9 +5256,9 @@ function make(item, _) {
       return React.createElement("div", {
                   className: "item"
                 }, React.createElement("input", {
-                      checked: Js_boolean.to_js_boolean(item[/* completed */1]),
+                      checked: Js_boolean.to_js_boolean(item[/* completed */2]),
                       type: "checkbox"
-                    }), item[/* title */0]);
+                    }), item[/* title */1]);
     });
   return newrecord;
 }
@@ -5270,8 +5270,12 @@ var TodoItem = /* module */[
 
 var component$1 = ReasonReact.reducerComponent("TodoApp");
 
+var lastId = [0];
+
 function newItem() {
+  lastId[0] = lastId[0] + 1 | 0;
   return /* record */[
+          /* id */lastId[0],
           /* title */"Click a button",
           /* completed : false */0
         ];
@@ -5293,7 +5297,7 @@ function make$1() {
                     }, "Add something"), React.createElement("div", {
                       className: "items"
                     }, $$Array.of_list(List.map((function (item) {
-                                return ReasonReact.element(/* None */0, /* None */0, make(item, /* array */[]));
+                                return ReasonReact.element(/* Some */[Pervasives.string_of_int(item[/* id */0])], /* None */0, make(item, /* array */[]));
                               }), items))), React.createElement("div", {
                       className: "footer"
                     }, Pervasives.string_of_int(numItems) + " item"));
@@ -5301,6 +5305,7 @@ function make$1() {
   newrecord[/* initialState */10] = (function () {
       return /* record */[/* items : :: */[
                 /* record */[
+                  /* id */0,
                   /* title */"Write some things to do",
                   /* completed : false */0
                 ],
@@ -5309,10 +5314,7 @@ function make$1() {
     });
   newrecord[/* reducer */12] = (function (_, param) {
       return /* Update */Block.__(0, [/* record */[/* items : :: */[
-                    /* record */[
-                      /* title */"Click a button",
-                      /* completed : false */0
-                    ],
+                    newItem(/* () */0),
                     param[/* items */0]
                   ]]]);
     });
@@ -5322,6 +5324,7 @@ function make$1() {
 exports.str       = str;
 exports.TodoItem  = TodoItem;
 exports.component = component$1;
+exports.lastId    = lastId;
 exports.newItem   = newItem;
 exports.make      = make$1;
 /* component Not a pure module */
