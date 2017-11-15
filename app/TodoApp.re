@@ -54,17 +54,15 @@ let make = (children) => {
       <button
         onClick=(reduce((_evt) => AddItem))
       >
-        (str("Add something"))
+        ("Add something" |> str)
       </button>
       <div className="items">
         (
-          ReasonReact.arrayToElement(Array.of_list(
-            List.map((item) => <TodoItem item />, items)
-          ))
+          List.map((item) => <TodoItem item />, items) |> Array.of_list |> ReasonReact.arrayToElement
         )
       </div>
       <div className="footer">
-        (str(string_of_int(numItems) ++ " item"))
+        (string_of_int(numItems) ++ " item" |> str)
       </div>
     </div>
   }
