@@ -5239,8 +5239,9 @@ var List        = __webpack_require__(13);
 var $$Array     = __webpack_require__(34);
 var Block       = __webpack_require__(9);
 var Curry       = __webpack_require__(2);
+var Input       = __webpack_require__(52);
 var React       = __webpack_require__(4);
-var Js_boolean  = __webpack_require__(39);
+var TodoItem    = __webpack_require__(51);
 var Pervasives  = __webpack_require__(14);
 var ReasonReact = __webpack_require__(18);
 
@@ -5248,74 +5249,7 @@ function str(prim) {
   return prim;
 }
 
-var component = ReasonReact.statelessComponent("TodoItem");
-
-function make(item, onToggle, _) {
-  var newrecord = component.slice();
-  newrecord[/* render */9] = (function () {
-      return React.createElement("div", {
-                  className: "item",
-                  onClick: (function () {
-                      return Curry._1(onToggle, /* () */0);
-                    })
-                }, React.createElement("input", {
-                      checked: Js_boolean.to_js_boolean(item[/* completed */2]),
-                      type: "checkbox"
-                    }), item[/* title */1]);
-    });
-  return newrecord;
-}
-
-var TodoItem = /* module */[
-  /* component */component,
-  /* make */make
-];
-
-function valueFromEvent(evt) {
-  return evt.target.value;
-}
-
-var component$1 = ReasonReact.reducerComponent("Input");
-
-function make$1(onSubmit, _) {
-  var newrecord = component$1.slice();
-  newrecord[/* render */9] = (function (param) {
-      var text = param[/* state */4];
-      var reduce = param[/* reduce */3];
-      return React.createElement("input", {
-                  placeholder: "Write something to do",
-                  type: "text",
-                  value: text,
-                  onKeyDown: (function (evt) {
-                      if (evt.key === "Enter") {
-                        Curry._1(onSubmit, text);
-                        return Curry._2(reduce, (function () {
-                                      return "";
-                                    }), /* () */0);
-                      } else {
-                        return 0;
-                      }
-                    }),
-                  onChange: Curry._1(reduce, (function (evt) {
-                          return evt.target.value;
-                        }))
-                });
-    });
-  newrecord[/* initialState */10] = (function () {
-      return "";
-    });
-  newrecord[/* reducer */12] = (function (newText, _) {
-      return /* Update */Block.__(0, [newText]);
-    });
-  return newrecord;
-}
-
-var Input = /* module */[
-  /* component */component$1,
-  /* make */make$1
-];
-
-var component$2 = ReasonReact.reducerComponent("TodoApp");
+var component = ReasonReact.reducerComponent("TodoApp");
 
 var lastId = [0];
 
@@ -5328,8 +5262,8 @@ function newItem(text) {
         ];
 }
 
-function make$2() {
-  var newrecord = component$2.slice();
+function make() {
+  var newrecord = component.slice();
   newrecord[/* render */9] = (function (param) {
       var items = param[/* state */4][/* items */0];
       var reduce = param[/* reduce */3];
@@ -5338,12 +5272,12 @@ function make$2() {
                   className: "app"
                 }, React.createElement("div", {
                       className: "title"
-                    }, "What to do", ReasonReact.element(/* None */0, /* None */0, make$1(Curry._1(reduce, (function (text) {
+                    }, "What to do", ReasonReact.element(/* None */0, /* None */0, Input.Input[/* make */1](Curry._1(reduce, (function (text) {
                                     return /* AddItem */Block.__(0, [text]);
                                   })), /* array */[]))), React.createElement("div", {
                       className: "items"
                     }, $$Array.of_list(List.map((function (item) {
-                                return ReasonReact.element(/* Some */[Pervasives.string_of_int(item[/* id */0])], /* None */0, make(item, Curry._1(reduce, (function () {
+                                return ReasonReact.element(/* Some */[Pervasives.string_of_int(item[/* id */0])], /* None */0, TodoItem.make(item, Curry._1(reduce, (function () {
                                                       return /* ToggleItem */Block.__(1, [item[/* id */0]]);
                                                     })), /* array */[]));
                               }), items))), React.createElement("div", {
@@ -5387,14 +5321,11 @@ function make$2() {
   return newrecord;
 }
 
-exports.str            = str;
-exports.TodoItem       = TodoItem;
-exports.valueFromEvent = valueFromEvent;
-exports.Input          = Input;
-exports.component      = component$2;
-exports.lastId         = lastId;
-exports.newItem        = newItem;
-exports.make           = make$2;
+exports.str       = str;
+exports.component = component;
+exports.lastId    = lastId;
+exports.newItem   = newItem;
+exports.make      = make;
 /* component Not a pure module */
 
 
@@ -26257,6 +26188,109 @@ function camelize(string) {
 }
 
 module.exports = camelize;
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Generated by BUCKLESCRIPT VERSION 2.0.0, PLEASE EDIT WITH CARE
+
+
+var Curry       = __webpack_require__(2);
+var React       = __webpack_require__(4);
+var Js_boolean  = __webpack_require__(39);
+var ReasonReact = __webpack_require__(18);
+
+function str(prim) {
+  return prim;
+}
+
+var component = ReasonReact.statelessComponent("TodoItem");
+
+function make(item, onToggle, _) {
+  var newrecord = component.slice();
+  newrecord[/* render */9] = (function () {
+      return React.createElement("div", {
+                  className: "item",
+                  onClick: (function () {
+                      return Curry._1(onToggle, /* () */0);
+                    })
+                }, React.createElement("input", {
+                      checked: Js_boolean.to_js_boolean(item[/* completed */2]),
+                      type: "checkboxz"
+                    }), item[/* title */1]);
+    });
+  return newrecord;
+}
+
+exports.str       = str;
+exports.component = component;
+exports.make      = make;
+/* component Not a pure module */
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Generated by BUCKLESCRIPT VERSION 2.0.0, PLEASE EDIT WITH CARE
+
+
+var Block       = __webpack_require__(9);
+var Curry       = __webpack_require__(2);
+var React       = __webpack_require__(4);
+var ReasonReact = __webpack_require__(18);
+
+function valueFromEvent(evt) {
+  return evt.target.value;
+}
+
+var component = ReasonReact.reducerComponent("Input");
+
+function make(onSubmit, _) {
+  var newrecord = component.slice();
+  newrecord[/* render */9] = (function (param) {
+      var text = param[/* state */4];
+      var reduce = param[/* reduce */3];
+      return React.createElement("input", {
+                  placeholder: "Write something to do",
+                  type: "text",
+                  value: text,
+                  onKeyDown: (function (evt) {
+                      if (evt.key === "Enter") {
+                        Curry._1(onSubmit, text);
+                        return Curry._2(reduce, (function () {
+                                      return "";
+                                    }), /* () */0);
+                      } else {
+                        return 0;
+                      }
+                    }),
+                  onChange: Curry._1(reduce, (function (evt) {
+                          return evt.target.value;
+                        }))
+                });
+    });
+  newrecord[/* initialState */10] = (function () {
+      return "";
+    });
+  newrecord[/* reducer */12] = (function (newText, _) {
+      return /* Update */Block.__(0, [newText]);
+    });
+  return newrecord;
+}
+
+var Input = /* module */[
+  /* component */component,
+  /* make */make
+];
+
+exports.valueFromEvent = valueFromEvent;
+exports.Input          = Input;
+/* component Not a pure module */
+
 
 /***/ })
 /******/ ]);

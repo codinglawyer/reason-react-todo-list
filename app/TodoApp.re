@@ -1,52 +1,7 @@
-type item = {
-  id: int,
-  title: string,
-  completed: bool
-};
+open TodoItem;
+open Input;
 
 let str = ReasonReact.stringToElement;
-
-module TodoItem = {
-  let component = ReasonReact.statelessComponent("TodoItem");
-  let make = (~item, ~onToggle, children) => {
-    ...component,
-    render: (_) =>
-      <div className="item" onClick=((_evt) => onToggle())>
-        <input _type="checkbox" checked=(Js.Boolean.to_js_boolean(item.completed)) />
-        (str(item.title))
-      </div>
-  };
-};
-
-let valueFromEvent = (evt) : string => (
-  evt
-  |> ReactEventRe.Form.target
-  |> ReactDOMRe.domElementToObj
-)##value;
-
-module Input = {
-  type state = string;
-  let component = ReasonReact.reducerComponent("Input");
-  let make = (~onSubmit, _) => {
-    ...component,
-    initialState: () => "",
-    reducer: (newText, _text) => ReasonReact.Update(newText),
-    render: ({state: text, reduce}) =>
-      <input
-        value=text
-        _type="text"
-        placeholder="Write something to do"
-        onChange=(reduce((evt) => valueFromEvent(evt)))
-        onKeyDown=(
-          (evt) =>
-            if (ReactEventRe.Keyboard.key(evt) == "Enter") {
-              onSubmit(text);
-              (reduce(() => ""))()
-            }
-        )
-      />
-  };
-};
 
 type state = {items: list(item)};
 
