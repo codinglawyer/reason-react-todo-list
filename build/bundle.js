@@ -5271,21 +5271,65 @@ var TodoItem = /* module */[
   /* make */make
 ];
 
-var component$1 = ReasonReact.reducerComponent("TodoApp");
+function valueFromEvent(evt) {
+  return evt.target.value;
+}
+
+var component$1 = ReasonReact.reducerComponent("Input");
+
+function make$1(onSubmit, _) {
+  var newrecord = component$1.slice();
+  newrecord[/* render */9] = (function (param) {
+      var text = param[/* state */4];
+      var reduce = param[/* reduce */3];
+      return React.createElement("input", {
+                  placeholder: "Write something to do",
+                  type: "text",
+                  value: text,
+                  onKeyDown: (function (evt) {
+                      if (evt.key === "Enter") {
+                        Curry._1(onSubmit, text);
+                        return Curry._2(reduce, (function () {
+                                      return "";
+                                    }), /* () */0);
+                      } else {
+                        return 0;
+                      }
+                    }),
+                  onChange: Curry._1(reduce, (function (evt) {
+                          return evt.target.value;
+                        }))
+                });
+    });
+  newrecord[/* initialState */10] = (function () {
+      return "";
+    });
+  newrecord[/* reducer */12] = (function (newText, _) {
+      return /* Update */Block.__(0, [newText]);
+    });
+  return newrecord;
+}
+
+var Input = /* module */[
+  /* component */component$1,
+  /* make */make$1
+];
+
+var component$2 = ReasonReact.reducerComponent("TodoApp");
 
 var lastId = [0];
 
-function newItem() {
+function newItem(text) {
   lastId[0] = lastId[0] + 1 | 0;
   return /* record */[
           /* id */lastId[0],
-          /* title */"Click a button",
+          /* title */text,
           /* completed : false */0
         ];
 }
 
-function make$1() {
-  var newrecord = component$1.slice();
+function make$2() {
+  var newrecord = component$2.slice();
   newrecord[/* render */9] = (function (param) {
       var items = param[/* state */4][/* items */0];
       var reduce = param[/* reduce */3];
@@ -5294,15 +5338,13 @@ function make$1() {
                   className: "app"
                 }, React.createElement("div", {
                       className: "title"
-                    }, "What to do"), React.createElement("button", {
-                      onClick: Curry._1(reduce, (function () {
-                              return /* AddItem */0;
-                            }))
-                    }, "Add something"), React.createElement("div", {
+                    }, "What to do", ReasonReact.element(/* None */0, /* None */0, make$1(Curry._1(reduce, (function (text) {
+                                    return /* AddItem */Block.__(0, [text]);
+                                  })), /* array */[]))), React.createElement("div", {
                       className: "items"
                     }, $$Array.of_list(List.map((function (item) {
                                 return ReasonReact.element(/* Some */[Pervasives.string_of_int(item[/* id */0])], /* None */0, make(item, Curry._1(reduce, (function () {
-                                                      return /* ToggleItem */[item[/* id */0]];
+                                                      return /* ToggleItem */Block.__(1, [item[/* id */0]]);
                                                     })), /* array */[]));
                               }), items))), React.createElement("div", {
                       className: "footer"
@@ -5320,7 +5362,7 @@ function make$1() {
     });
   newrecord[/* reducer */12] = (function (action, param) {
       var items = param[/* items */0];
-      if (action) {
+      if (action.tag) {
         var id = action[0];
         var items$1 = List.map((function (item) {
                 var match = +(item[/* id */0] === id);
@@ -5337,7 +5379,7 @@ function make$1() {
         return /* Update */Block.__(0, [/* record */[/* items */items$1]]);
       } else {
         return /* Update */Block.__(0, [/* record */[/* items : :: */[
-                      newItem(/* () */0),
+                      newItem(action[0]),
                       items
                     ]]]);
       }
@@ -5345,12 +5387,14 @@ function make$1() {
   return newrecord;
 }
 
-exports.str       = str;
-exports.TodoItem  = TodoItem;
-exports.component = component$1;
-exports.lastId    = lastId;
-exports.newItem   = newItem;
-exports.make      = make$1;
+exports.str            = str;
+exports.TodoItem       = TodoItem;
+exports.valueFromEvent = valueFromEvent;
+exports.Input          = Input;
+exports.component      = component$2;
+exports.lastId         = lastId;
+exports.newItem        = newItem;
+exports.make           = make$2;
 /* component Not a pure module */
 
 
